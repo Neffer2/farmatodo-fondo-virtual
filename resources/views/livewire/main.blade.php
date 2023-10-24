@@ -8,7 +8,7 @@
             <div id="codigo-qr" class="p-2">
                 <img src="https://borealtech.com/wp-content/uploads/2018/10/codigo-qr-1024x1024-1.jpg" alt="">
             </div>
-        </div>
+        </div> 
     @else
         <div id="menu-scene" class="menu-scene">        
             <div class="form-group pb-3">
