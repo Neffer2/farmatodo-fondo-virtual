@@ -22,8 +22,8 @@ const modulesList = [
   'skin',
 ]
 
-const desiredWidth = 550
-const desiredHeight = 534
+const desiredWidth = 650
+const desiredHeight = 574
 export const fps = {
   cam: 0,
   processing: 0,

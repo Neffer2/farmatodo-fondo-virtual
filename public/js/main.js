@@ -134,7 +134,7 @@ async function takeScreenshot (){
     new Promise((resolve) => logo2.onload = resolve)
     ]).then(() => {
       const logo2Width = originalImage.width;
-      const logo2Height = 350;
+      const logo2Height = 260;
 
       canvas.width = originalImage.width;
       canvas.height = originalImage.height;
