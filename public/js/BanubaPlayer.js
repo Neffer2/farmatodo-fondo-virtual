@@ -15,9 +15,9 @@ const modulesList = [
   'background',
   'body',
   'eyes',
-  'face_tracker',
+  'face_tracker', 
   'hair',
-  'hands',
+  'hands', 
   'lips',
   'skin',
 ]

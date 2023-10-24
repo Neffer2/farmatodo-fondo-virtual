@@ -12,36 +12,34 @@
     @else
         <div id="menu-scene" class="menu-scene">        
             <div class="form-group pb-3">
-                <img src="assets/images/boton.png" height="150" type="button" name="source" id="webcam" value="webcam" style="opacity: 0.5; pointer-events: none;">
+                <img src="{{ asset('assets/images/boton.png') }}" height="150" type="button" name="source" id="webcam" value="webcam" style="opacity: 0.5; pointer-events: none;">
             </div>
             <div class="logos">
-                <img style="margin-bottom: 5px;" src="assets/images/sanofi.png" height="25">
-                <img src="assets/images/allegra.png" height="25" type="button" name="source">
+                <img style="margin-bottom: 5px;" src="{{ asset('assets/images/sanofi.png') }}" height="25">
+                <img src="{{ asset('assets/images/allegra.png') }}" height="25" type="button" name="source">
             </div>
         </div>
         <div id="webcam-scene" class="webcam-scene hidden">
             <div class="farmatodo">
-                <img src="assets/images/farmatodo.png">
+                <img src="{{ asset('assets/images/farmatodo.png') }}">
             </div>
             <div id="webar">
                 <button id="screen-shot" class="btn btn-primary camera-button"> 
                     <i class="fa-solid fa-camera"></i>
                 </button>
+                <img id="marco" src="{{ asset('assets/images/marco1.png') }}" style="position: absolute; width: 100%; bottom: 0%;">
             </div>
             <div class="banner">
-                <img src="assets/images/escoge-fondo.png">
+                <img src="{{ asset('assets/images/escoge-fondo.png') }}">
             </div>
             <div class="miniaturas">
-                <img src="assets/images/back2.jpg">
-                <img src="assets/images/back2.jpg">
-                <img src="assets/images/back2.jpg">
-                <img src="assets/images/back2.jpg">
-                <img src="assets/images/back2.jpg">
+                <img id="fondo-1" src="{{ asset('assets/images/fondo_cuadrado_1.jpg') }}">
+                <img id="fondo-2" src="{{ asset('assets/images/fondo_cuadrado_2.jpg') }}">
             </div>
             
             <div class="logos">
-                <img style="margin-bottom: 5px;" src="assets/images/sanofi.png" height="25">
-                <img src="assets/images/allegra.png" height="25" type="button" name="source">
+                <img style="margin-bottom: 5px;" src="{{ asset('assets/images/sanofi.png') }}" height="25">
+                <img src="{{ asset('assets/images/allegra.png') }}" height="25" type="button" name="source">
             </div>
         </div>
     @endif

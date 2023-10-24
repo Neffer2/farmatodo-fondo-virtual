@@ -23,14 +23,14 @@ let webcamScene = document.getElementById('webcam-scene')
 let mainBody = document.getElementById('main-body')
 let screenshotBtn = document.getElementById('screen-shot')
 
+let fondo1 = document.getElementById('fondo-1');
+let fondo2 = document.getElementById('fondo-2');
+let marco = document.getElementById('marco');
 
-let selectedCategoryInput
 let selectedEffect
-
 let controlBlock
 let controlFunc
 let curEventType
-
 
 const setEffectParam = async (params, value, arg) => {
   for (const param of params) {
@@ -39,26 +39,11 @@ const setEffectParam = async (params, value, arg) => {
   }
 }
 
-const removeEffectControlHandler = () => {
-  effectControlBlock.innerHTML = ''
-
-  if (curEventType === 'analise') {
-    stopAnalysis()
-    handGesturesBlock.classList.add('hidden')
-    heartRateBlock.classList.add('hidden')
-    testRulerBlock.classList.add('hidden')
-  } else if (curEventType) {
-    controlBlock.removeEventListener(curEventType, controlFunc)
-  }
-}
-
-
 const addEffectControlHandler = (control) => {
 
   curEventType = control
 
   switch (control) {
-
     case 'slider':
       const min = selectedEffect.minValue !== undefined ? selectedEffect.minValue : -10
       effectControlBlock.innerHTML = `
@@ -110,50 +95,14 @@ const addEffectControlHandler = (control) => {
       controlFunc = null
       curEventType = null
   }
-
 }
 
-const startEffect = () => {
-  selectedEffect = 'Background_change_1.zip'
+const startEffect = (effect = 'Background_change_1.zip') => {
+  selectedEffect = effect
   const effectPath = 'assets/effects/'
   applyEffect(effectPath + selectedEffect)
     .then(() => addEffectControlHandler(selectedEffect?.control))
-}
-
-const createEffectBlock = async (effects) => {
-  let htmlBlock = ''
-  const onEffectSelect = async (e) => {
-    removeEffectControlHandler()
-    await clearEffect()
-    startEffect(e?.target.value ?? 0)
-  }
-
-  if (effects.length > 1) {
-
-    for (let i in effects) {
-      htmlBlock += `
-        <div class="effect"> 
-          <label>
-            <input type="radio" name="effect" id="${i}" value="${i}">
-              <div class="effect-icon__border">
-                <img class="effect-icon" src="assets/icons/effects/${effects[i].icon}" alt="${effects[i].name}">
-              </div>
-          </label>
-        </div>`
-    }
-
-    effectsBlock.innerHTML = htmlBlock
-    effectsBlock.style.marginLeft = selectedCategoryInput.value === 'facemorphing' ? '-60px' : null
-
-    document.querySelectorAll('input[name="effect"]').forEach((el, i) => {
-      el.addEventListener('click', onEffectSelect)
-      if (i === 0) el.click();
-    })
-  } else {
-    effectsBlock.innerHTML = htmlBlock
-    await onEffectSelect()
-  }
-}
+} 
  
 const onWebcamSelect = (e) => {
   startPlayer()
@@ -167,7 +116,7 @@ const onWebcamSelect = (e) => {
 
 enablePlay()
 
-// ME ejecuto cuando todo acaba de cargar;
+// Me ejecuto cuando todo acaba de cargar;
 function enablePlay (){
   webcamSourceButton.style.opacity = "1";
   webcamSourceButton.style.pointerEvents = "all";
@@ -176,8 +125,58 @@ function enablePlay (){
 async function takeScreenshot (){
   let canva = document.getElementsByTagName("canvas")[0];
   let url = canva.toDataURL('image/png');
-  Livewire.emit('savePhotoListener', url) 
+
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const originalImage = new Image();
+  originalImage.src = url;
+
+  const logo2 = new Image();
+  logo2.src = (selectedEffect === "Background_change_1.zip") ? "assets/images/marco1.png" : "assets/images/marco2.png";
+
+  Promise.all([
+    new Promise((resolve) => originalImage.onload = resolve),
+    new Promise((resolve) => logo2.onload = resolve)
+    ]).then(() => {
+      const logo2Width = originalImage.width;
+      const logo2Height = 200;
+
+      canvas.width = originalImage.width;
+      canvas.height = originalImage.height;
+      ctx.drawImage(originalImage, 0, 0);
+
+      const logo2X = 0;
+      const logo2Y = canvas.height - logo2Height;
+      ctx.drawImage(logo2, logo2X, logo2Y, logo2Width, logo2Height);
+
+      const imageWithLogo = new Image();
+      imageWithLogo.src = canvas.toDataURL();
+      /* ***** */
+      // Decodificar la imagen Base64
+      const imageData = imageWithLogo.src.split(',')[1];
+      const decodedImageData = atob(imageData);
+      // Convertir la imagen decodificada en un arreglo de bytes
+      const byteCharacters = decodedImageData.split('').map(char => char.charCodeAt(0));
+      const byteArray = new Uint8Array(byteCharacters);
+      // Crear un objeto Blob a partir del arreglo de bytes
+      const blob = new Blob([byteArray], { type: 'image/png' }); // Ajusta el tipo MIME según el formato de la imagen
+      // Crear un objeto FormData y agregar el blob
+      const formData = new FormData();
+      formData.append('image', blob, 'image.png'); // El último parámetro es el nombre del archivo
+      /* ***** */
+      Livewire.emit('savePhotoListener', imageWithLogo.src)
+    });
 }
 
 webcamSourceButton.addEventListener('click', onWebcamSelect)
 screenshotBtn.addEventListener('click', takeScreenshot); 
+
+fondo1.addEventListener('click', () => {
+  startEffect('Background_change_1.zip');
+  marco.src="assets/images/marco1.png"
+});
+
+fondo2.addEventListener('click', () => {
+  startEffect('Background_change_2.zip');
+  marco.src="assets/images/marco2.png"
+});
