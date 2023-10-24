@@ -3,16 +3,12 @@ import {importedEffectsList} from "./import/effectsList.js";
 import {
   applyEffect,
   applyEffectParam,
-  clearEffect,
-  getScreenshot,
   startAnalysis,
   startGame,
   startPlayer,
-  stopAnalysis,
 } from "./BanubaPlayer.js"
 
 const webcamSourceButton = document.querySelector('#webcam')
-const effectsBlock = document.querySelector('.effects-list')
 const effectControlBlock = document.querySelector('.effect-control')
 const handGesturesBlock = document.querySelector('.hand-gestures')
 const heartRateBlock = document.querySelector('.heart-rate')
@@ -30,7 +26,6 @@ let marco = document.getElementById('marco');
 let selectedEffect
 let controlBlock
 let controlFunc
-let curEventType
 
 const setEffectParam = async (params, value, arg) => {
   for (const param of params) {

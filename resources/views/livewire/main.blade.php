@@ -6,7 +6,7 @@
                 <h3 class="px-3 text-center">Guarda tu <b>c&oacute;digo</b> y descarga tu foto escaneando el c&oacute;digo QR</h3>
             </div>
             <div id="codigo-qr" class="p-2">
-                <img src="https://borealtech.com/wp-content/uploads/2018/10/codigo-qr-1024x1024-1.jpg" alt="">
+                <img src="{{ asset('assets/images/qr-code.png') }}" alt="">
             </div>
         </div> 
     @else
