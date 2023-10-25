@@ -133,7 +133,7 @@ canvas {
 }
 
 #codigo-qr {
-    height: 70%;
+    height: 55%;
     display: flex;
     justify-content: center;
     align-items: center;

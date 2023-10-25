@@ -1,6 +1,6 @@
 <div style="height: 100%">
     @if ($showCodigo)
-        <div class="code-scene">        
+        <div class="code-scene">         
             <div id="codigo-label">
                 <h1>Tu c&oacute;digo: <b>{{ $codigo }}</b></h1>
                 <h3 class="px-3 text-center">Guarda tu <b>c&oacute;digo</b> y descarga tu foto escaneando el c&oacute;digo QR</h3>
@@ -8,6 +8,9 @@
             <div id="codigo-qr" class="p-2">
                 <img src="{{ asset('assets/images/qr-code.png') }}" alt="">
             </div>
+            <a class="btn btn-primary" href="{{ route('/') }}" style="background-color: #6f42c1; border-color: #6f42c1">  
+                <i class="fa-solid fa-rotate-left"></i>
+            </a>
         </div> 
     @else
         <div id="menu-scene" class="menu-scene">        
