@@ -16,7 +16,7 @@
         <div id="menu-scene" class="menu-scene">        
             <div class="logos">
                 {{-- <img style="margin-bottom: 5px;" src="{{ asset('assets/images/sanofi.png') }}" height="25"> --}}
-                <img src="{{ asset('assets/images/allegra.png') }}" height="40" type="button" name="source" style="margin-top: 1.5rem">
+                <img src="{{ asset('assets/images/allegra.png') }}" height="100" type="button" name="source" style="margin-bottom: 3rem">
             </div>
             <div class="form-group pb-3">
                 <img src="{{ asset('assets/images/boton.png') }}" height="150" type="button" name="source" id="webcam" value="webcam" style="opacity: 0.5; pointer-events: none;">
