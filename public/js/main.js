@@ -21,6 +21,8 @@ let screenshotBtn = document.getElementById('screen-shot')
 
 let fondo1 = document.getElementById('fondo-1');
 let fondo2 = document.getElementById('fondo-2');
+let fondo3 = document.getElementById('fondo-3');
+let fondo4 = document.getElementById('fondo-4');
 let marco = document.getElementById('marco');
 
 let selectedEffect
@@ -127,7 +129,15 @@ async function takeScreenshot (){
   originalImage.src = url;
 
   const logo2 = new Image();
-  logo2.src = (selectedEffect === "Background_change_1.zip") ? "assets/images/marco1.png" : "assets/images/marco2.png";
+  if (selectedEffect === "Background_change_1.zip"){
+    logo2.src = "assets/images/marco1.png";
+  }else if(selectedEffect === "Background_change_2.zip"){
+    logo2.src = "assets/images/marco2.png"
+  }else if(selectedEffect === "Background_change_3.zip"){
+    logo2.src = "assets/images/marco3.png"
+  }else if(selectedEffect === "Background_change_4.zip"){
+    logo2.src = "assets/images/marco4.png"
+  }
 
   Promise.all([
     new Promise((resolve) => originalImage.onload = resolve),
@@ -174,4 +184,14 @@ fondo1.addEventListener('click', () => {
 fondo2.addEventListener('click', () => {
   startEffect('Background_change_2.zip');
   marco.src="assets/images/marco2.png"
+});
+
+fondo3.addEventListener('click', () => {
+  startEffect('Background_change_3.zip');
+  marco.src="assets/images/marco3.png"
+});
+
+fondo4.addEventListener('click', () => {
+  startEffect('Background_change_4.zip');
+  marco.src="assets/images/marco4.png"
 });

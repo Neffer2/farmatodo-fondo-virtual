@@ -3,7 +3,7 @@
         <div class="buscar pb-0">
             <input type="text" class="form-control" wire:model="codigo">        
             <button id="screen-shot" class="btn btn-primary search-button" wire:click="search"> 
-                <i class="fa-solid fa-camera"></i>
+                <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
             <div class="descargar">
